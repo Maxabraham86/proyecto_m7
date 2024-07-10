@@ -7,9 +7,10 @@ class Command(BaseCommand):
 
     def handle (self, *args, **kwargs):
 
-
-        c=crear_user('11111111-1', 'Juan', 'Marino', 'aaa@bbb.ccc', '1234', 'calle falsa 123', '123456789')
+        #funciona con la funcion que ya funcionaba 
+        #c=crear_user('11111111-1', 'Juan', 'Marino', 'aaa@bbb.ccc', '1234', 'calle falsa 123', '123456789')
         
+        crear_user('1234567-8', 'Pedro', 'Picapiedra', 'aaa@bbb.ccc', '1234', '1234' , 'Av Rocadira 48')
 
 
         # inmueble4= Inmueble.objects.create(
