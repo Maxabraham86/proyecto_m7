@@ -82,9 +82,9 @@ def editar_user(username: str,first_name:str ,last_name:str, email:str, password
 #             propietario=propietario
 #         )
 
-def crear_inmueble(nombre:str, descripcion:str, M2_construidos:int, M2_totales_terreno:int, cant_estacionamientos:int, cant_habitaciones:int, cant_banos:int, direccion:str, precio_mensual:int, tipo_vivienda:str, comuna:str, rut_propietario:str):
-    comuna = Comuna.objects.get(nombre=comuna)
-    propietario = User.objects.get(username=rut_propietario)
+def crear_inmueble(nombre:str, descripcion:str, M2_construidos:int, M2_totales_terreno:int, cant_estacionamientos:int, cant_habitaciones:int, cant_banos:int, direccion:str, precio_mensual:int, tipo_vivienda:str, comuna_cod :str, propietario_rut:str):
+    comuna = Comuna.objects.get(cod=comuna_cod)
+    propietario = User.objects.get(username=propietario_rut)
     Inmueble.objects.create(
         nombre = nombre,
         descripcion = descripcion,
@@ -119,7 +119,7 @@ def editar_inmueble(inmueble_id:int, nombre:str, descripcion:str, M2_construidos
     inmueble.save()
 
 def eliminar_inmueble(inmueble_id):
-    eliminar=Inmueble.objects.get()
+    eliminar=Inmueble.objects.get(id=inmueble_id)
     eliminar.delete()
 
 

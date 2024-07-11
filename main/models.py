@@ -11,10 +11,18 @@ class UserProfile(models.Model):
     direccion = models.CharField(max_length= 255)
     telefono = models.CharField(max_length=255 , null=True)
 
+class Region (models.Model):
+    cod= models.CharField(max_length=5, primary_key = True)
+    nombre = models.CharField(max_length=255)
+
+    def _str__(self):
+        return self.nombre
 
 
 class Comuna(models.Model):
-    nombre = models.CharField(max_length=255, unique=True)
+    cod= models.CharField(max_length=5, primary_key = True)
+    nombre = models.CharField(max_length=255)
+    region = models.ForeignKey(Region, on_delete=models.RESTRICT, related_name ='comunas')
     
     def _str__(self):
         return self.nombre
