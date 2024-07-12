@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from main.models import UserProfile, Comuna, Inmueble
+from main.models import UserProfile, Comuna, Inmueble, Region
 from django.db.utils import IntegrityError
 
 #este ya funciona
@@ -62,26 +62,6 @@ def editar_user(username: str,first_name:str ,last_name:str, email:str, password
     user_profile.save()
 
 
-# def crear_inmueble(nombre, descripcion,direccion, M2_construidos, M2_totales_terreno, tipo_vivienda, precio_mensual,cant_estacionamientos,cant_habitacion,cant_banos, comuna_id, propietario_id ):
-# #inmueble1= Inmueble.objects.create( 
-    
-#         comuna = Comuna.objects.get(id=comuna_id)
-#         proprietario = User.objectos.get(id_propietario)
-#         inmueble=Inmueble(
-#             nombre= nombre,
-#             descripcion =descripcion,
-#             M2_construidos= M2_construidos,
-#             M2_totales_terreno= M2_totales_terreno,
-#             direccion=direccion,
-#             comuna =comuna,
-#             tipo_vivienda = tipo_vivienda,
-#             precio_mensual= precio_mensual,
-#             cant_estacionamientos =cant_estacionamientos,
-#             cant_habitacion =cant_habitacion,
-#             cant_banos=cant_banos,
-#             propietario=propietario
-#         )
-
 def crear_inmueble(nombre:str, descripcion:str, M2_construidos:int, M2_totales_terreno:int, cant_estacionamientos:int, cant_habitaciones:int, cant_banos:int, direccion:str, precio_mensual:int, tipo_vivienda:str, comuna_cod :str, propietario_rut:str):
     comuna = Comuna.objects.get(cod=comuna_cod)
     propietario = User.objects.get(username=propietario_rut)
@@ -128,3 +108,35 @@ def eliminar_inmueble(inmueble_id):
 def eliminar_user(rut:str):
     eliminar = User.object.get(username=rut)
     eliminar.delete()
+    
+def obtener_inmuebles_comunas(filtro):
+    if filtro is None:
+        return Inmueble.objects.all().order_by('comuna')
+
+    #si llegamos acá, significa que Si hay un filtro
+    return Inmueble.objects.filter(nombre__icontains=filtro).order_by('comuna')
+
+def obtener_inmuebles_regiones(filtro):
+    if filtro is None:
+        
+        consulta ='select * from main_inmueble as I join main_comuna as C on I.comuna_id = C.cod join main_region as R on C.region_id = R.cod order by R.cod'
+        
+        return Inmueble.objects.raw(consulta)
+
+    #si llegamos acá, significa que Si hay un filtro
+    #return Inmueble.objects.filter(nombre__icontains=filtro).order_by('region')
+
+
+
+
+# def obtener_inmuebles_regiones():
+    
+    
+#     regiones = Region.objects.all()
+#     resultados ={}
+    
+#     for region in regiones:
+#         inmuebles=Inmueble.objects.filter(comuna__region=region)
+#         resultados[region.nombre]=inmuebles
+        
+#     return resultados

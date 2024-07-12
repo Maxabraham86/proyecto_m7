@@ -15,8 +15,8 @@ class Region (models.Model):
     cod= models.CharField(max_length=5, primary_key = True)
     nombre = models.CharField(max_length=255)
 
-    def _str__(self):
-        return self.nombre
+    def __str__(self):
+        return f'{self.nombre} {(self.cod)}'  
 
 
 class Comuna(models.Model):
@@ -24,8 +24,8 @@ class Comuna(models.Model):
     nombre = models.CharField(max_length=255)
     region = models.ForeignKey(Region, on_delete=models.RESTRICT, related_name ='comunas')
     
-    def _str__(self):
-        return self.nombre
+    def __str__(self):
+        return f'{self.nombre}{(self.cod)}'
 
 
 

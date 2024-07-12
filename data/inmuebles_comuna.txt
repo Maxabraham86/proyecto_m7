@@ -1,0 +1,20 @@
+Casa en el bosque 	Una hermosa casa en medio del bosque	Iquique
+Departamento en la ciudad 	Un moderno departamento en el centro	Ollagüe
+Parcela con vista al mar 	Una parcela amplia con vista al mar	Combarbalá
+Casa antigua restaurada 	Una casa antigua completamente restaurada	San Vicente
+Departamento pequeño 	Un departamento pequeño pero acogedor	Colbún
+Casa moderna 	Una casa moderna con diseño contemporáneo	Colbún
+Parcela agrícola 	Una parcela ideal para la agricultura	Longaví
+Departamento en edificio 	Un departamento en un edificio con amenities	Toltén
+Departamento con vista 	Un departamento con una vista espectacular	Pedro Aguirre Cerda
+Parcela con piscina 	Una parcela con una gran piscina	Puente Alto
+Departamento con terraza 	Un departamento con una gran terraza	Alhué
+Casa de campo 	Una casa de campo tranquila y aislada	Alhué
+Parcela con bosque 	Una parcela rodeada de un pequeño bosque	Padre Hurtado
+Departamento duplex 	Un departamento duplex con dos pisos	Máfil
+Casa con jardín 	Una casa con un amplio jardín	Futrono
+Departamento céntrico 	Un departamento céntrico cerca de todo	General Lagos
+Parcela con viñedos 	Una parcela con viñedos propios	General Lagos
+Parcela rústica 	Una parcela con un diseño rústico	General Lagos
+Casa en la playa 	Una casa frente a la playa	Chillán
+Casa con sótano 	Una casa con un gran sótano	Quirihue

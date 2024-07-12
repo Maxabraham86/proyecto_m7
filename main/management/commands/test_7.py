@@ -1,7 +1,7 @@
 
 from django.core.management.base import BaseCommand
 from main.models import UserProfile, Comuna, Inmueble, Solicitud
-from main.services import crear_user, editar_user, crear_inmueble, editar_inmueble
+from main.services import crear_user, editar_user, crear_inmueble, editar_inmueble, obtener_inmuebles_regiones
 class Command(BaseCommand):
         
 
@@ -26,7 +26,11 @@ class Command(BaseCommand):
         
         #editar_inmueble(1,'Parcela en Villarrica', 'propiedad ideal para relajarse y cuidar animales', 150, 250, 3, 5, 4, 'volcan 22', 700000, 'par', 'villarrica', '112233445-5')
         
-        crear_inmueble('Bella casa de piedra', 'Amoblada con dinosaurios', 120, 250, 1,3,1,'Av. Rocosa 331', 500_000,'casa', '05606','1234567-8' )
+        #crear_inmueble('Bella casa de piedra', 'Amoblada con dinosaurios', 120, 250, 1,3,1,'Av. Rocosa 331', 500_000,'casa', '05606','1234567-8' )
         
-        
+        # inmuebles = obtener_inmuebles_comunas()
+        # import pdb; pdb.set_trace()
+        datos = obtener_inmuebles_regiones(filtro)
+        for dato in datos:
+            print(dato.direccion)
         return 'okidoki'
