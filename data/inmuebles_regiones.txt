@@ -1,0 +1,20 @@
+Casa en el bosque 	Una hermosa casa en medio del bosque	De Tarapacá
+Departamento en la ciudad 	Un moderno departamento en el centro	De Antofagasta
+Parcela con vista al mar 	Una parcela amplia con vista al mar	De Coquimbo
+Casa antigua restaurada 	Una casa antigua completamente restaurada	Del Libertador B. O'Higgins
+Departamento pequeño 	Un departamento pequeño pero acogedor	Del Maule
+Parcela agrícola 	Una parcela ideal para la agricultura	Del Maule
+Casa moderna 	Una casa moderna con diseño contemporáneo	Del Maule
+Departamento en edificio 	Un departamento en un edificio con amenities	De La Araucanía
+Departamento con vista 	Un departamento con una vista espectacular	Metropolitana de Santiago
+Parcela con piscina 	Una parcela con una gran piscina	Metropolitana de Santiago
+Departamento con terraza 	Un departamento con una gran terraza	Metropolitana de Santiago
+Parcela con bosque 	Una parcela rodeada de un pequeño bosque	Metropolitana de Santiago
+Casa de campo 	Una casa de campo tranquila y aislada	Metropolitana de Santiago
+Casa con jardín 	Una casa con un amplio jardín	De Los Ríos
+Departamento duplex 	Un departamento duplex con dos pisos	De Los Ríos
+Parcela con viñedos 	Una parcela con viñedos propios	De Arica y Parinacota
+Departamento céntrico 	Un departamento céntrico cerca de todo	De Arica y Parinacota
+Parcela rústica 	Una parcela con un diseño rústico	De Arica y Parinacota
+Casa con sótano 	Una casa con un gran sótano	De Ñuble
+Casa en la playa 	Una casa frente a la playa	De Ñuble

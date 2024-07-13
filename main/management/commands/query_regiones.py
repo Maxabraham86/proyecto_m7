@@ -17,14 +17,16 @@ class Command(BaseCommand):
             filtro=  None
             if 'f' in kwargs.keys() and kwargs['f'] is not None:
                 filtro = kwargs['f'][0]
-            #inmuebles = obtener_inmuebles_regiones(filtro)
-                inmuebles=Inmueble.objects.all()    
+            inmuebles = obtener_inmuebles_regiones(filtro)
                 
-            if filtro:
-                inmuebles =inmuebles.filter(nombre__icontains=filtro)
+                #inmuebles=Inmueble.objects.all()    
+                
+            # if filtro:
+            #     inmuebles =inmuebles.filter(nombre__icontains=filtro)
                 
             for inmueble in inmuebles:
-                linea = f'{inmueble.nombre} \t{inmueble.descripcion}\t{inmueble.comuna.region.nombre}'
+                print(inmueble)
+                linea = f'{inmueble[0]} \t{inmueble[1]}\t{inmueble[2]}'
                 archivo.write(linea)
                 archivo.write('\n')
                 print(linea)

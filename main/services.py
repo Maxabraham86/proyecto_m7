@@ -1,7 +1,8 @@
 from django.contrib.auth.models import User
 from main.models import UserProfile, Comuna, Inmueble, Region
 from django.db.utils import IntegrityError
-
+from django.db.models import Q 
+from django.db import connection
 #este ya funciona
 
 # def crear_user(rut: str,first_name:str ,last_name:str, email:str, password:str, direccion:str, telefono:str):
@@ -108,15 +109,29 @@ def eliminar_inmueble(inmueble_id):
 def eliminar_user(rut:str):
     eliminar = User.object.get(username=rut)
     eliminar.delete()
-    
+
+
+    #esta funciona  
+# def obtener_inmuebles_comunas(filtro):
+#     if filtro is None:
+#         return Inmueble.objects.all().order_by('comuna')
+
+#     #si llegamos acá, significa que Si hay un filtro
+#     return Inmueble.objects.filter(nombre__icontains=filtro).order_by('comuna')
+
+
+
 def obtener_inmuebles_comunas(filtro):
     if filtro is None:
         return Inmueble.objects.all().order_by('comuna')
 
     #si llegamos acá, significa que Si hay un filtro
-    return Inmueble.objects.filter(nombre__icontains=filtro).order_by('comuna')
+    return Inmueble.objects.filter(Q(nombre__icontains=filtro) | Q ( descripcion__icontains=filtro)).order_by('comuna')
 
-def obtener_inmuebles_regiones(filtro):
+
+
+
+def obtener_inmuebles_regiones1(filtro):
     if filtro is None:
         
         consulta ='select * from main_inmueble as I join main_comuna as C on I.comuna_id = C.cod join main_region as R on C.region_id = R.cod order by R.cod'
@@ -126,6 +141,32 @@ def obtener_inmuebles_regiones(filtro):
     #si llegamos acá, significa que Si hay un filtro
     #return Inmueble.objects.filter(nombre__icontains=filtro).order_by('region')
 
+
+def obtener_inmuebles_regiones(filtro):
+    consulta ='''select I.nombre, I.descripcion, R.nombre as region from main_inmueble as I join main_comuna as C on I.comuna_id = C.cod join main_region as R on C.region_id = R.cod order by R.cod'''
+    if filtro is not None:
+        consulta =f'''select I.nombre, I.descripcion, R.nombre as region from main_inmueble as I join main_comuna as C on I.comuna_id = C.cod join main_region as R on C.region_id = R.cod where I.nombre like '%{filtro}%' or I.descripcion like '%{filtro}%' order by R.cod'''    
+    cursor= connection.cursor()
+    cursor.execute(consulta)
+    registros = cursor.fetchall()    
+    return registros
+
+
+
+
+
+
+
+#probablemente desecho
+
+# def obtener_inmuebles_regiones(filtro):
+#     if filtro is None:
+#         return Inmueble.objects.all()
+#     return Inmueble.objects.filter(nombre__icontains=filtro)
+    
+#         consulta ='select * from main_inmueble as I join main_comuna as C on I.comuna_id = C.cod join main_region as R on C.region_id = R.cod order by R.cod'
+        
+#         return Inmueble.objects.raw(consulta)
 
 
 
