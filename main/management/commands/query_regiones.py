@@ -19,11 +19,6 @@ class Command(BaseCommand):
                 filtro = kwargs['f'][0]
             inmuebles = obtener_inmuebles_regiones(filtro)
                 
-                #inmuebles=Inmueble.objects.all()    
-                
-            # if filtro:
-            #     inmuebles =inmuebles.filter(nombre__icontains=filtro)
-                
             for inmueble in inmuebles:
                 print(inmueble)
                 linea = f'{inmueble[0]} \t{inmueble[1]}\t{inmueble[2]}'
@@ -31,3 +26,8 @@ class Command(BaseCommand):
                 archivo.write('\n')
                 print(linea)
             archivo.close()
+
+            # with open('data/inmuebles_comuna.txt', 'w') as file:
+            #     for inmueble in inmuebles:
+            #         linea = f'{inmueble[0]}\t{inmueble[1]}\t\t{inmueble[2]}\n'
+            #         file.write(linea)
