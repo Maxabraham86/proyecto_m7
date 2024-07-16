@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+
+{% block content %}
 <h1>este es el index</h1>
 
 
@@ -6,6 +9,20 @@
     type="button"
     class="btn btn-outline-primary"
 >
-    Button
+    test
 </button>
 </a>
+
+<a href="/accounts/login/">
+<button
+    type="button"
+    class="btn btn-outline-primary"
+>login</button>
+</a>
+
+<div class="btn-group">
+    <a href="/form_test/" class="btn btn-primary active" aria-current="page">Active link</a>
+    <a href="/accounts/login/" class="btn btn-primary">Link</a>
+</div>
+
+{% endblock %}
