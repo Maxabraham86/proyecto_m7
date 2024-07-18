@@ -3,24 +3,8 @@ from main.models import UserProfile, Comuna, Inmueble, Region
 from django.db.utils import IntegrityError
 from django.db.models import Q 
 from django.db import connection
-#este ya funciona
-
-# def crear_user(rut: str,first_name:str ,last_name:str, email:str, password:str, direccion:str, telefono:str):
-#     user = User.objects.create_user(
-#             username= rut,
-#             first_name = first_name,
-#             last_name= last_name,
-#             email= email,
-#             password=  password
-#         )
-#     UserProfile.objects.create(
-#             user=user,
-#             direccion=direccion,
-#             telefono =telefono,
-#         )
-
-
-#metodo trabajado en clases
+from django.shortcuts import render, redirect
+from django.contrib import messages
 
 def crear_user(rut: str,first_name:str ,last_name:str, email:str, password:str, pass_confirm:str, direccion:str, telefono:str =None)->[bool, str]:
         #validamos que el password coincida
@@ -165,3 +149,12 @@ def editar_user_sin_password(username, first_name, last_name, email, direccion, 
     user_profile.save()
 
 
+
+def cambio_pass(req, password, pass_repeat):
+    if password != pass_repeat:
+        messages.warning(req,' la contraseña no coincide')
+        return 
+    req.user.set_password(password)
+    req.user.save()
+    messages.success(req, 'Contraseña actualizada exitosamente')
+    

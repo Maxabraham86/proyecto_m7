@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import HttpResponse
-from main.services import editar_user_sin_password
+from main.services import editar_user_sin_password, cambio_pass
 from django.contrib.auth.models import User
 from django.contrib import messages
 
@@ -29,7 +29,7 @@ def edit_user(req):
     current_user = req.user
     
     #llamo  la funcion para editar el usuario
-    if req.POST ['telefono'] !='':
+    if req.POST ['telefono'].strip !='':
         #editar lo trailing whitespaces strip
         editar_user_sin_password(
             current_user.username,
@@ -53,25 +53,31 @@ def edit_user(req):
     return redirect('/')
             
     
+# def change_password(req):
+    
+#     #1 recibo los datos del formulario
+#     password= req.POST['password']
+#     pass_repeat= req.POST['pass-repeat']
+#     # 2 Valido que ambas contraseñas coincidad
+    
+#     if password != pass_repeat:
+#         messages.error(req, 'Las contraseñas no coinciden')
+#         return redirect('/accounts/profile')
+#     #3 actualizamos la contraseña
+#     req.user.set_password(password)
+#     req.user.save()
+    
+#     # 4 se arroja un mensaje de exito al usuario
+#     messages.success(req, 'Contraseña actualizada')
+#     return redirect('/accounts/profile')
+    
+
+
+
 def change_password(req):
     
-    #1 recibo los datos del formulario
+    
     password= req.POST['password']
-    pass_repeat= req.POST['pass-repeat']
-    # 2 Valido que ambas contraseñas coincidad
-    
-    if password != pass_repeat:
-        messages.error(req, 'Las contraseñas no coinciden')
-        return redirect('/accounts/profile')
-    #3 actualizamos la contraseña
-    req.user.set_password(password)
-    req.user.save()
-    
-    # 4 se arroja un mensaje de exito al usuario
-    messages.success(req, 'Contraseña actualizada')
-    return redirect('/accounts/profile')
-    
-
-
-
-
+    pass_repeat= req.POST['pass_repeat']
+    cambio_pass(req, password, pass_repeat)
+    return redirect ('/accounts/profile')
