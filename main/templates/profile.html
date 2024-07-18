@@ -7,89 +7,125 @@
 >
     
     <div class="col-3"><h3 class="text-center">
-        </h3>cambia tu contraseña</div>
-        
-    <div class="col-5"><h3 class="text-center">edita tus datos personales
-        </h3>
-        <form action="/edit-user/" method="post">
+            cambia tu contraseña</h3>
+        <form action="/accounts/change-pass/" method="post">
             {% csrf_token %}
-            <div class="mb-3">
-            <label for="" class="form-label">Email</label>
+        <div class="mb-3">
+            <label for="" class="form-label">Contraseña</label>
                 <input
-                    type="email"
+                    type="password"
                     class="form-control"
-                    name="email"
-                    id="email"
-                    aria-describedby="helpId"
-                    placeholder="abc@mail.com"
-                    value="{{user.email}}"
+                    name="password"
+                    id="password"
+                    placeholder="******"    
+                    required
+                            
                 />
-            </div>
-
-
-    <div class="mb-3">
-        <label for="" class="form-label">Name</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    name="first_name"
-                    id="first_name"
-                    aria-describedby="helpId"
-                    placeholder="tu nombre"
-                    value="{{user.first_name}}"
-                />
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">Repetir Contraseña</label>
+                    <input
+                        type="password"
+                        class="form-control"
+                        name="pass-repeat"
+                        id="pass-repeat"
+                        placeholder="******"
+                        required
+                            
+                    />
+        </div>
+                <input type="submit" value="cambiar" class="btn btn-outline-danger">
+        </form>
     </div>
 
-
-    <div class="mb-3">
-        <label for="" class="form-label">Apellido</label>
-        <input
-            type="text"
-            class="form-control"
-            name="last_name"
-            id="last_name"
-            aria-describedby="helpId"
-            placeholder="tu apellido"
-            value="{{user.last_name}}"
-        />
-    </div>
-
-    <div class="mb-3">
-        <label for="" class="form-label">direccion</label>
-        <input
-            type="text"
-            class="form-control"
-            name="direccion"
-            id="direccion"
-            aria-describedby="helpId"
-            placeholder="tu direccion"
-            value="{{user.usuario.direccion}}"
-        />
-    </div>
-
-    <div class="mb-3">
-        <label for="" class="form-label">Teléfono</label>
-        <input
-            type="text"
-            class="form-control"
-            name="telefono"
-            id="telefono"
-            aria-describedby="helpId"
-            placeholder="tu telefono"
-            value="{% if user.usuario.telefono %}{{user.usuario.telefono}}{% endif %}"
-            
         
+
+
+
+            
+            
+            
+    <div class="col-5"><h3 class="text-center">edita tus datos personales
+            </h3>
+            <form action="/edit-user/" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                <label for="" class="form-label">Email</label>
+                    <input
+                        type="email"
+                        class="form-control"
+                        name="email"
+                        id="email"
+                        
+                        placeholder="abc@mail.com"
+                        value="{{user.email}}"
+                    />
+                </div>
+
+
+        <div class="mb-3">
+            <label for="" class="form-label">Name</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="first_name"
+                        id="first_name"
+                        
+                        placeholder="tu nombre"
+                        value="{{user.first_name}}"
+                    />
+        </div>
+
+
+        <div class="mb-3">
+            <label for="" class="form-label">Apellido</label>
+            <input
+                type="text"
+                class="form-control"
+                name="last_name"
+                id="last_name"
+                
+                placeholder="tu apellido"
+                value="{{user.last_name}}"
             />
+        </div>
+
+        <div class="mb-3">
+            <label for="" class="form-label">direccion</label>
+            <input
+                type="text"
+                class="form-control"
+                name="direccion"
+                id="direccion"
+                
+                placeholder="tu direccion"
+                value="{{user.usuario.direccion}}"
+            />
+        </div>
+
+        <div class="mb-3">
+            <label for="" class="form-label">Teléfono</label>
+            <input
+                type="text"
+                class="form-control"
+                name="telefono"
+                id="telefono"
+                
+                placeholder="tu telefono"
+                value="{% if user.usuario.telefono %}{{user.usuario.telefono}}{% endif %}"
+                
+            
+                />
+        </div>
+
+
+        <input type="submit" value="Enviar" class="btn btn-outline-success">
+
+        </form>
+
+        
     </div>
 
-
-    <input type="submit" value="Enviar" class="btn btn-outline-success">
-
-    </form>
-
-
-    </div>
-    
 
     <div class="col-4"><h3 class="text-center">tus propiedades
     </h3></div>
@@ -107,5 +143,6 @@
 
 
 
+</div>
 
 {% endblock %}
