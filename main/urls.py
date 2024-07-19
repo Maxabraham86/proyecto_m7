@@ -1,5 +1,5 @@
 from django.urls import path
-from main.views import form_test, index, profile, edit_user, change_password
+from main.views import form_test, index, profile, edit_user, change_password, add_propiedad
 from django.contrib.auth import views as auth_views
 
 
@@ -9,5 +9,6 @@ urlpatterns =[
     #path('flan/<id>/', detalleFlan, name="flan id"),
     path('accounts/profile/', profile, name='profile'),
     path('edit-user/', edit_user , name ='edit_user'),
-    path('accounts/change-pass/', change_password, name ='change_password' )
+    path('accounts/change-pass/', change_password, name ='change_password' ),
+    path('add-propiedad/', add_propiedad, name = "add_propiedad")
 ]

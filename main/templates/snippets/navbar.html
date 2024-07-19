@@ -19,13 +19,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/form_test">Test</a>
                 </li>
-                {% if user.is_authenticated %}
+                
                 <li class="nav-item">
-                    <a class="nav-link" href="/welcome">Bienvenido</a>
+                    <a class="nav-link" href="{% url 'add_propiedad' %}">Agregar propiedades</a>
                 </li>
-                {% endif %}
+                
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'profile' %}">mis datos</a>
+                    <a class="nav-link" href="{% url 'profile' %}">Mis datos</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link ml-5" href="#">Registrate</a>

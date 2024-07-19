@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-6 offset-3 ">
+    <h3 class="text-center">Crea tu propiedad en la base de datos</h3>
+    <form action="/add-propiedad/" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" required>
+        </div>
+        <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción</label>
+            <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripción"
+                required>
+        </div>
+        <div class="mb-3">
+            <label for="M2_construidos" class="form-label">M2 Construidos</label>
+            <input type="number" class="form-control" name="M2_construidos" id="M2_construidos"
+                placeholder="M2 Construidos" required>
+        </div>
+        <div class="mb-3">
+            <label for="M2_totales_terreno" class="form-label">M2 Totales del Terreno</label>
+            <input type="number" class="form-control" name="M2_totales_terreno" id="M2_totales_terreno"
+                placeholder="M2 Totales del Terreno" required>
+        </div>
+        <div class="mb-3">
+            <label for="cant_estacionamientos" class="form-label">Cantidad de Estacionamientos</label>
+            <input type="number" class="form-control" name="cant_estacionamientos" id="cant_estacionamientos"
+                placeholder="Cantidad de Estacionamientos" required>
+        </div>
+        <div class="mb-3">
+            <label for="cant_habitaciones" class="form-label">Cantidad de Habitaciones</label>
+            <input type="number" class="form-control" name="cant_habitaciones" id="cant_habitaciones"
+                placeholder="Cantidad de Habitaciones" required>
+        </div>
+        <div class="mb-3">
+            <label for="cant_banos" class="form-label">Cantidad de Baños</label>
+            <input type="number" class="form-control" name="cant_banos" id="cant_banos" placeholder="Cantidad de Baños"
+                required>
+        </div>
+        <div class="mb-3">
+            <label for="direccion" class="form-label">Dirección</label>
+            <input type="text" class="form-control" name="direccion" id="direccion" placeholder="Dirección" required>
+        </div>
+        <div class="mb-3">
+            <label for="precio_mensual" class="form-label">Precio Mensual</label>
+            <input type="number" class="form-control" name="precio_mensual" id="precio_mensual"
+                placeholder="Precio Mensual" required>
+        </div>
+        <div class="mb-3">
+            <label for="tipo_vivienda" class="form-label">Tipo de Vivienda</label>
+            <input type="text" class="form-control" name="tipo_vivienda" id="tipo_vivienda"
+                placeholder="Tipo de Vivienda" required>
+        </div>
+        <div class="mb-3">
+            <label for="comuna" class="form-label">Comuna</label>
+            <input type="text" class="form-control" name="comuna" id="comuna" placeholder="Comuna" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+</div>
+
+{% endblock %}
