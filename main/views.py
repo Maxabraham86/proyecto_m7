@@ -26,7 +26,6 @@ def profile (req):
 def edit_user(req):
     # 1 Obtengo el usuario actual
     current_user = req.user
-    
     #llamo  la funcion para editar el usuario
     if req.POST ['telefono'].strip !='':
         #editar lo trailing whitespaces strip
@@ -55,31 +54,22 @@ def edit_user(req):
     # forma desde la vista
     
 # def change_password(req):
-    
-#     #1 recibo los datos del formulario
+# # 1 recibo los datos del formulario
 #     password= req.POST['password']
 #     pass_repeat= req.POST['pass-repeat']
-#     # 2 Valido que ambas contraseñas coincidad
-    
+# # 2 Valido que ambas contraseñas coincidad
 #     if password != pass_repeat:
 #         messages.error(req, 'Las contraseñas no coinciden')
 #         return redirect('/accounts/profile')
-#     #3 actualizamos la contraseña
+# # 3 actualizamos la contraseña
 #     req.user.set_password(password)
 #     req.user.save()
-    
-#     # 4 se arroja un mensaje de exito al usuario
+# # 4 se arroja un mensaje de exito al usuario
 #     messages.success(req, 'Contraseña actualizada')
 #     return redirect('/accounts/profile')
     
-
 #forma desde un servicio
-
-
-
-def change_password(req):
-    
-    
+def change_password(req): 
     password= req.POST['password']
     pass_repeat= req.POST['pass_repeat']
     cambio_pass(req, password, pass_repeat)
@@ -104,3 +94,23 @@ def add_propiedad(req):
         return redirect ('profile')
     else:
         return render (req, 'add_propiedad.html')
+    
+    
+    
+def register(req):
+    if req.method == 'POST':
+        rut = req.POST ['rut']
+        first_name = req.POST ['first_name']
+        last_name = req.POST ['last_name']
+        email = req.POST ['email']
+        password = req.POST['password']
+        pass_confirm = req.POST ['pass_confirm']
+        direccion = req.POST ['direccion']
+        telefono = req.POST ['telefono']
+        crear_user(
+            rut,first_name ,last_name, email, password, pass_confirm, direccion, telefono)
+        return redirect('index')
+        
+    else:
+        return render(req, 'register.html')
+        

@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block content %}
+<h3 class="text-center"> crear nueva propiedad</h3>
+<form action="/inmueble/crear/" method="post">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-4 p-3">
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" name="nombre" id="nombre" required
+                    placeholder="nombre de la propiedad" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripción:</label>
+                <textarea name="descripcion" class="form-control" id="descripcion" rows="3" required maxlength="1500" placeholder="breve descripción..."></textarea>
+            </div>
+    
+            
+            <div class="mb-3">
+            <label for="nombre" class="form-label">Metros Construídos:</label>
+            <input min="1" name="M2_construidos" type="number" class="form-control" id="M2_construidos" required placeholder="23 m^2">
+            </div>
+        
+            <div class="mb-3">
+            <label for="nombre" class="form-label">Metros Totales de Terreno:</label>
+            <input min="1" name="M2_totales_terreno" type="number" class="form-control" id="M2_totales_terreno" required placeholder="50 m^2">
+            </div>
+        </div>
+
+        
+        <div class="col-4 p-3">
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Cant. Estacionamientos:</label>
+                <input min="0" value="0" name="cant_estacionamientos" type="number" class="form-control" id="cant_estacionamientos" required placeholder="num">
+            </div>
+            
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Cant. habitaciones:</label>
+                <input min="0" value="0" name="cant_habitaciones" type="number" class="form-control" id="cant_estacionamientos" required placeholder="num">
+            </div>
+
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Cant. baños:</label>
+                <input min="0" value="0" name="cant_banos" type="number" class="form-control" id="cant_banos" required placeholder="num">
+            </div>
+
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Direccion</label>
+                <input type="text" class="form-control" name="direccion" id="direccion" required
+                    placeholder="tu direccion" required>
+            </div>
+
+        </div>
+        
+            <div class="col-4 p-3">
+                <div class="mb-3">
+                    <select class="form-select" required name="tipo_inmueble">
+                        <option value>Selecciona un tipo</option>
+                        {% for tipo in tipos_inmueble %}
+                        <option value="{{ tipo.0 }}">{{ tipo.1 }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Precio (CLP)</label>
+                    <input min="1000" name="precio" type="number" class="form-control" id="precio" required placeholder="$250.000">
+                </div>
+                
+                <div class="mb-3">
+                    <select class="form-select" required name="region_cod" id="region_cod">
+                        <option value>Selecciona una region </option>
+                        {% for region in regiones %}
+                        <option value="{{ region.cod }}">{{ region.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="mb-3">
+                    <select class="form-select" required name="comuna_cod" id="comuna_cod">
+                        <option value>Selecciona una Comuna </option>
+                        {% for comuna in comunas %}
+                        <option value="{{ comuna.cod }}">{{ comuna.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                
+            </div>
+        </div>
+        <div class="text-center">
+            <button type= "submit" class="btn btn-success"> Crear</button>
+
+        </div>
+</form>
+{% endblock %}
+
+
+{% block js %}
+        <script>
+            function filtrar_comunas (){
+                //recuperamos el valor seleccionado de la region
+                const cod_seleccionado = $(this).val()
+                console.log(cod_seleccionado)
+                // ahora iteramos sobre todas las comunas, y mostramos sólo aquellas cuyo código tenga como prefijo  el codigo de la region seleccionada 
+                $('#comuna_cod option').each(function() {
+                    const comuna=$(this);
+                    const cod_comuna = comuna.val()
+                    if (cod_seleccionado == cod_comuna.substring(0,2)){
+                        // la comuna es parte de la region
+                        comuna.show()
+
+                    } else{
+                        comuna.hide()
+                    }
+                })
+            }
+
+            $('#region_cod').on('change', filtrar_comunas)
+
+        </script>
+
+{% endblock %}
+

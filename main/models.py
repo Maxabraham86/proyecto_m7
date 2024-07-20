@@ -14,7 +14,7 @@ class UserProfile(models.Model):
     rol = models.CharField(max_length=255, choices=roles, default='arrendatario')
 
     def __str__(self):
-        return f'{self.user.first_name} { self.user.last_name} {self.id}'
+        return f'{self.user.first_name} { self.user.last_name} {self.rol}'
 
 class Region (models.Model):
     cod= models.CharField(max_length=5, primary_key = True)
