@@ -1,9 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib import messages
 from main.models import Inmueble, Region, Comuna
 from django.http import HttpResponse 
 from main.services import crear_inmueble as crear_inmueble_service
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
 def solo_arrendadores(user):
@@ -14,7 +16,7 @@ def solo_arrendadores(user):
         return False
 
 
-
+@login_required
 @user_passes_test(solo_arrendadores)
 def nuevo_inmueble(req):
     # pasar los datos requeridos por el formulario
@@ -27,6 +29,7 @@ def nuevo_inmueble(req):
     }
     
     return render(req,'nuevo_inmueble.html', context)
+
 
 @user_passes_test(solo_arrendadores)
 def crear_inmueble(req):
@@ -44,7 +47,8 @@ def crear_inmueble(req):
         int(req.POST['precio_mensual']),
         req.POST['tipo_vivienda'],
         req.POST['comuna_cod'],
+        propietario_rut
         )
     
-    messages.success(req, 'Contraseña actualizada exitosamente')
-        
+    messages.success(req, 'propiedad agregada exitosamente')
+    return redirect ('/accounts/profile/')

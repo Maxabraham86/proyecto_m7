@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-6 offset-3 ">
+    <h3 class="text-center">Registra tu usuario</h3>
+    <form action="{% url 'register'%}" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="form-label">Rut:</label>
+            <input
+                id=""
+                type="text"
+                class="form-control"
+                name="rut"
+                placeholder=""
+                value="{{ rut | default:'' }}"
+                required
+            >
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Nombre:</label>
+            <input
+                id=""
+                type="text"
+                class="form-control"
+                name="first_name"
+                placeholder=""
+                value="{{ first_name | default:'' }}"
+                required
+            >
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Apellido:</label>
+            <input
+                id=""
+                type="text"
+                class="form-control"
+                name="last_name"
+                placeholder=""
+                value="{{ last_name | default:'' }}"
+                required
+            >
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Email:</label>
+            <input
+                id=""
+                type="email"
+                class="form-control"
+                name="email"
+                placeholder=""
+                value="{{ email | default:'' }}"
+                required
+            >
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Teléfono:</label>
+            <input
+                id=""
+                type="text"
+                class="form-control"
+                name="telefono"
+                placeholder=""
+                value="{{ telefono | default:'' }}"
+            >
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Dirección:</label>
+            <input
+                id=""
+                type="text"
+                class="form-control"
+                name="direccion"
+                placeholder=""
+                value="{{ direccion | default:'' }}"
+                required
+            >
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Ingrese contraseña:</label>
+            <input
+                id=""
+                type="password"
+                class="form-control"
+                name="password"
+                placeholder=""
+                value="{{ password | default:'' }}"
+                required
+            >
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Repita contraseña:</label>
+            <input
+                id=""
+                type="password"
+                class="form-control"
+                name="pass_confirm"
+                placeholder=""
+                value="{{ pass_confirm | default:'' }}"
+                required
+            >
+        </div>
+        <div class="mb-3">
+            <div class="form-check form-check-inline">
+                <input
+                    id=""
+                    type="radio"
+                    class="form-check-imput"
+                    name="rol"
+                    placeholder=""
+                    value="arrendador"
+                    required
+                    {% if rol == 'arrendador' %}
+                        checked
+                    {% endif %}
+                >
+                <label class="form-check-label">Arrendador</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input
+                    id=""
+                    type="radio"
+                    class="form-check-imput"
+                    name="rol"
+                    placeholder=""
+                    value="arrendatario"
+                    required
+                    {% if rol == 'arrendatario' %}
+                        checked
+                    {% endif %}
+                >
+                <label class="form-check-label">Arrendatario</label>
+            </div>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+</div>
+
+{% endblock %}

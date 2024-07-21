@@ -6,7 +6,7 @@ from django.db import connection
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
-def crear_user(rut: str,first_name:str ,last_name:str, email:str, password:str, pass_confirm:str, direccion:str, telefono:str =None)->[bool, str]:
+def crear_user(req,rut: str,first_name:str ,last_name:str, email:str, password:str, pass_confirm:str, direccion:str, telefono:str =None)->[bool, str]:
         #validamos que el password coincida
     if password !=pass_confirm:
         return False, 'las contraseñas no coinciden'
@@ -29,8 +29,8 @@ def crear_user(rut: str,first_name:str ,last_name:str, email:str, password:str, 
         direccion=direccion,
         telefono =telefono,
     )
-
     #4 si todo sale bien retornamos True
+    messages.success(req, 'Usuario creado con exito, ingrese a su sesion')
     return True
 
 def editar_user(username: str,first_name:str ,last_name:str, email:str, password:str, direccion:str, telefono:str =None):

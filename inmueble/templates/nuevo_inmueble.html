@@ -59,7 +59,7 @@
         
             <div class="col-4 p-3">
                 <div class="mb-3">
-                    <select class="form-select" required name="tipo_inmueble">
+                    <select class="form-select" required name="tipo_vivienda">
                         <option value>Selecciona un tipo</option>
                         {% for tipo in tipos_inmueble %}
                         <option value="{{ tipo.0 }}">{{ tipo.1 }}</option>
@@ -69,7 +69,7 @@
                 
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Precio (CLP)</label>
-                    <input min="1000" name="precio" type="number" class="form-control" id="precio" required placeholder="$250.000">
+                    <input min="1000" name="precio_mensual" type="number" class="form-control" id="precio_mensual" required placeholder="$250.000">
                 </div>
                 
                 <div class="mb-3">

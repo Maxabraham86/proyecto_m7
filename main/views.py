@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import HttpResponse
-from main.services import editar_user_sin_password, cambio_pass, crear_inmueble
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django import template
+from main.services import editar_user_sin_password, cambio_pass, crear_inmueble, crear_user
+from main.models import Inmueble
+
 #from django.contrib.auth import user
 
 def success(req):
@@ -20,7 +22,12 @@ def index(req):
 
 @login_required
 def profile (req):
-    return render (req, 'profile.html')
+    id_usuario = req.user.id
+    propiedades = Inmueble.objects.filter(propietario_id = id_usuario)
+    context ={
+        'propiedades' : propiedades
+    }
+    return render (req, 'profile.html', context)
 
 @login_required
 def edit_user(req):
@@ -96,7 +103,12 @@ def add_propiedad(req):
         return render (req, 'add_propiedad.html')
     
     
-    
+    # test solicita que el usuario requiere no estar autentificado
+def usuario_no_autentificado(user):
+    # retorna un usuario no  autentificado
+    return not user.is_authenticated
+
+@user_passes_test(usuario_no_autentificado) # eñ 
 def register(req):
     if req.method == 'POST':
         rut = req.POST ['rut']
@@ -108,8 +120,8 @@ def register(req):
         direccion = req.POST ['direccion']
         telefono = req.POST ['telefono']
         crear_user(
-            rut,first_name ,last_name, email, password, pass_confirm, direccion, telefono)
-        return redirect('index')
+            req,rut,first_name ,last_name, email, password, pass_confirm, direccion, telefono)
+        return redirect('/accounts/login')
         
     else:
         return render(req, 'register.html')

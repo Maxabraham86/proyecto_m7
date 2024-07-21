@@ -22,20 +22,18 @@
                 {% if user.usuario.rol == 'arrendador' or user.is_staff %}
 
                 <li class="nav-item">
-                    <a class="nav-link" href=" {% url 'nuevo_inmueble' %}">nuevo inmueble</a>
+                    <a class="nav-link" href=" {% url 'nuevo_inmueble' %}">Agregar inmueble</a>
                 </li>
 
                 {% endif %}
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'add_propiedad' %}">Agregar propiedades</a>
-                </li>
                 
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'profile' %}">Mis datos</a>
                 </li>
+                
                 <li class="nav-item">
-                    <a class="nav-link ml-5" href="#">Registrate</a>
+                    <a class="nav-link ml-5" href="{% url 'register' %}">Registrate</a>
                 </li>
             </ul>
             <div id="list-group-flush" class="d-flex mx-5" role="search">

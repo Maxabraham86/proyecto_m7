@@ -72,13 +72,11 @@
 
   <div class="col-4">
     <h3 class="text-center">tus propiedades
-    </h3>
+    </h3> 
+    {% for propiedad in propiedades %}
+      <h5 class="text-primary">{{ propiedad.nombre}} </h5>
+      <h5 class="text-warning">{{propiedad.comuna}}</h5>
+    {% endfor %}
   </div>
-
 </div>
-
-
-
-
-
 {% endblock %}
