@@ -2,7 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
-
+from django.forms import forms
 # Create your models here.
 
 
@@ -57,7 +57,8 @@ class Inmueble(models.Model):
     comuna = models.ForeignKey(Comuna,related_name='inmuebles', on_delete = models.RESTRICT)
     propietario= models.ForeignKey (User, on_delete=models.RESTRICT, related_name='inmuebles')
 # class region : PDTE
-
+    def __str__(self):
+        return f'{self.nombre}'
     
     
 class Solicitud(models.Model):

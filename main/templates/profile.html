@@ -74,8 +74,16 @@
     <h3 class="text-center">tus propiedades
     </h3> 
     {% for propiedad in propiedades %}
-      <h5 class="text-primary">{{ propiedad.nombre}} </h5>
-      <h5 class="text-warning">{{propiedad.comuna}}</h5>
+
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">{{ propiedad.nombre}} </h6>
+        <p class="card-text">{{propiedad.comuna}}</p>
+        <a href="#" class="card-link">Card link</a>
+        <a href="/inmueble/editar/{{propiedad.id }}" class="card-link">Editar</a>
+      </div>
+    </div>
     {% endfor %}
   </div>
 </div>
