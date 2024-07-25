@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django import template
 from main.services import editar_user_sin_password, cambio_pass, crear_inmueble, crear_user
-from main.models import Inmueble
+from main.models import Inmueble, Comuna, Region
 
 #from django.contrib.auth import user
 
@@ -17,9 +17,40 @@ def form_test(req):
 
 @login_required
 def index(req):
-    return render (req, 'index.html')
+    datos = req.GET
+    region_cod = datos.get('region_cod', '')
+    comuna_cod = datos.get('comuna_cod', '')
+    palabra = datos.get('palabra', '')
+    
+    inmuebles = filtrar_inmuebles(region_cod, comuna_cod, palabra)
+    comunas = Comuna.objects.all()
+    regiones = Region.objects.all()
+    context = {
+        'comunas':comunas,
+        'regiones': regiones,
+        'inmuebles': inmuebles
+    }
+    
+    return render (req, 'index.html', context)
 
 
+def filtrar_inmuebles(region_cod, comuna_cod,palabra):
+    # Caso 1: comuna_cod != ''
+    # Caso 2: comuna_cod == '' and region_cod != ''
+    # Caso 3: comuna_cod == '' and region_cod == ''
+    if comuna_cod != '':
+        comuna = Comuna.objects.get(cod=comuna_cod)
+        
+        return Inmueble.objects.filter(comuna= comuna)
+    # elif comuna_cod == '' and region_cod != '':
+    #     return Inmueble.objects.filter()
+    
+    inmuebles = Inmueble.objects.all()
+    
+    return inmuebles
+
+
+#esta funciona para filtrar las propiedades que pertenecen al usuario
 @login_required
 def profile (req):
     id_usuario = req.user.id
@@ -28,6 +59,22 @@ def profile (req):
         'propiedades' : propiedades
     }
     return render (req, 'profile.html', context)
+
+# @login_required
+# def profile(req):
+#     user=req.usermis_inmuebles= None
+#     if user.user_profile.rol == 'arrendador':
+#         mis_inmuebles = user.inmuebles.all()
+#     elif user.user_profile.rol == 'arrendatario':
+#         pass
+    
+#     context ={
+#         'mis_inmuebles' : mis_inmuebles
+#     }
+#     return render(req, 'profile.html', context)
+    
+
+
 
 @login_required
 def edit_user(req):

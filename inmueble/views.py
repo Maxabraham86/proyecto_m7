@@ -3,8 +3,8 @@ from django.contrib.auth.decorators import user_passes_test
 from django.contrib import messages
 from django.http import HttpResponse 
 from django.contrib.auth.decorators import login_required
-from main.models import Inmueble , Region, Comuna 
-from main.services import crear_inmueble as crear_inmueble_service, editar_inmueble as editar_inmueble_service
+from main.models import Inmueble , Region, Comuna , UserProfile
+from main.services import crear_inmueble as crear_inmueble_service, editar_inmueble as editar_inmueble_service, eliminar_inmueble as eliminar_inmueble_service
 #from inmueble.forms import InmuebleForm
 # Create your views here.
 
@@ -57,6 +57,7 @@ def crear_inmueble(req):
 def solo_propietarios(user):
     id_usuario = requers.user.id
     propiedades = Inmueble.objects.filter(propietario_id = id_usuario)
+    
 
 @login_required
 @user_passes_test(solo_arrendadores)
@@ -97,8 +98,12 @@ def editar_inmueble(req, id):
             req.POST['comuna_cod'],
             propietario_rut
             )
-    
-
         messages.success(req, 'propiedad editada exitosamente')
         return redirect ('/accounts/profile/')
         
+
+@user_passes_test(solo_arrendadores)
+def eliminar_inmueble(req, id):
+    eliminar_inmueble_service(id)
+    messages.error(req,'Inmueble ha sido eliminado')
+    return redirect ('/accounts/profile/')

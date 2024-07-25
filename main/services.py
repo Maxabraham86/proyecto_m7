@@ -91,7 +91,7 @@ def eliminar_inmueble(inmueble_id):
 
 
 def eliminar_user(rut:str):
-    eliminar = User.object.get(username=rut)
+    eliminar = User.object.get(username=rut).delete
     eliminar.delete()
 
 

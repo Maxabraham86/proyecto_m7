@@ -39,7 +39,8 @@ class Inmueble(models.Model):
     inmueble_tipo=(
         ('casa','Casa'),
         ('depto','Departamento'),
-        ('par','Parcela')
+        ('par','Parcela'),
+        ('bodega', 'Bodega')
     )
     nombre = models.CharField(max_length=50)
     descripcion=models.TextField(max_length=1500)

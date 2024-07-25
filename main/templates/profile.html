@@ -77,14 +77,36 @@
 
     <div class="card" style="width: 18rem;">
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <h6 class="card-subtitle mb-2 text-body-secondary">{{ propiedad.nombre}} </h6>
+        <h5 class="card-title">{{ propiedad.nombre}} </h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">{{propiedad.descripcion}}</h6>
         <p class="card-text">{{propiedad.comuna}}</p>
-        <a href="#" class="card-link">Card link</a>
-        <a href="/inmueble/editar/{{propiedad.id }}" class="card-link">Editar</a>
+        <a href="{% url 'eliminar_inmueble' id=propiedad.id %}" class="card-link" onclick="eliminar(event)"><i class="bi bi-trash3-fill" id="{{propiedad.id}}"></i>
+        </a>
+        <a href="/inmueble/editar/{{propiedad.id }}" class="card-link"><i class="bi bi-pencil-fill"></i></a>
       </div>
     </div>
     {% endfor %}
   </div>
 </div>
+{% endblock %}
+
+
+{% block js %}
+  <script>
+    function eliminar(event){
+    //1 Evitamos que enlace me dirija a otro lado
+    event.preventDefault()
+    // 2 recuperamos el id del enlace clickeado
+    const id=event.target.id
+    const url = '/inmueble/eliminar/' + id 
+    //3 confirmamos si el usuario quiere eliminar o no
+    // console.log("eliminando propiedad"+href)
+    const confirmacion= confirm('Click en aceptar seguir la operacion')
+    if (confirmacion == true){
+      // redirijo la pagina al URL construida
+      window.location.href = url
+    }
+    }
+  </script>
+
 {% endblock %}
