@@ -40,10 +40,15 @@ def filtrar_inmuebles(region_cod, comuna_cod,palabra):
     # Caso 3: comuna_cod == '' and region_cod == ''
     if comuna_cod != '':
         comuna = Comuna.objects.get(cod=comuna_cod)
-        
         return Inmueble.objects.filter(comuna= comuna)
-    # elif comuna_cod == '' and region_cod != '':
-    #     return Inmueble.objects.filter()
+    
+    elif comuna_cod == '' and region_cod != '':
+        region = Region.objects.get(cod=region_cod)
+        comunas = Comuna.objects.filter(region=region)
+        return Inmueble.objects.filter(comuna__in=comunas, nombre__icontains= palabra)
+    
+    else:
+        return Inmueble.objects.filter(nombre__icontains=palabra)
     
     inmuebles = Inmueble.objects.all()
     
@@ -59,20 +64,6 @@ def profile (req):
         'propiedades' : propiedades
     }
     return render (req, 'profile.html', context)
-
-# @login_required
-# def profile(req):
-#     user=req.usermis_inmuebles= None
-#     if user.user_profile.rol == 'arrendador':
-#         mis_inmuebles = user.inmuebles.all()
-#     elif user.user_profile.rol == 'arrendatario':
-#         pass
-    
-#     context ={
-#         'mis_inmuebles' : mis_inmuebles
-#     }
-#     return render(req, 'profile.html', context)
-    
 
 
 

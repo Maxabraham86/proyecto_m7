@@ -107,3 +107,18 @@ def eliminar_inmueble(req, id):
     eliminar_inmueble_service(id)
     messages.error(req,'Inmueble ha sido eliminado')
     return redirect ('/accounts/profile/')
+
+
+@login_required
+def detalle_inmueble(req, id):
+    id=int(id)
+    inmueble_encontrado = None
+    inmuebles = Inmueble.objects.all()
+    for inmueble in inmuebles:
+        if inmueble.id == id:
+            inmueble_encontrado = inmueble
+        break
+    context ={
+        'inmueble':inmueble_encontrado
+    }
+    return render(req, 'detalle_inmueble.html', context)

@@ -46,7 +46,7 @@
                             <p class="card-text">{{inmueble.descripcion}}</p>
                         </div>
                         <div class="col-4">
-                            <a href="#" class="btn btn-primary">ver detalle</a>
+                            <a href="/inmueble/detalle/{{inmueble.id }}" class="btn btn-primary">ver detalle</a>
                                 
                         </div>
                     </div>
@@ -56,7 +56,7 @@
     </div>
 </div>
 {% endblock %}
-
+{% block js %}
 <script>
 function filtrar_comuna(){
     const cod_seleccionado = $(this). val()
@@ -64,21 +64,13 @@ function filtrar_comuna(){
     $("#comuna_cod  option").each(function(){
         const comuna=$(this)
         const cod_comuna = comuna.val()
-
         if(cod_selecionado == cod_comuna.substring(0.2)){
             comuna.show()
         } else{
             comuna.hide
         }
-
-
         })
     }
-
-
-
     $("#region_cod").on("change", filtrar_comunas)
-
-
-
 </script>
+{% endblock %}

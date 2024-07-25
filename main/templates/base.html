@@ -31,6 +31,11 @@
 
         <header>
             {% block header %}
+            <div id="logo">
+                <div class="text-center d-block ">
+                    <img src="{% static 'img/for_rent.jpg' %}" class="my-3 bg-dark w-25" alt=''>
+                </div>
+            </div>
             {% endblock %}
 
         </header>
@@ -91,7 +96,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     {% block js %}
-    <script src="{% static 'js/script.js' %}"></script>
+    <!-- <script src="{% static 'js/script.js' %}"></script> -->
     <script>
         // setTimeout(ACCION, TIEMPO DE ESPERA)
         setTimeout(function () {

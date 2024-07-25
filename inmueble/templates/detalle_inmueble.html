@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-8 offset-2">
+            
+        
+            <div class="card mt-3">
+                <div class="card-body">
+                    
+                            <h5 class="card-title">{{inmueble.nombre}}</h5>
+                            <p class="card-text">{{inmueble.descripcion}}</p>
+                            <p class="card-text">{{inmueble.precio_mensual}}</p>
+                            <a href="/inmueble/detalle/{{inmueble.id }}" class="btn btn-primary">ver detalle</a>
+                                
+                        
+                    
+                </div>
+            </div>
+        
+        </div>
+    </div>
+
+    
+{% endblock %}
+
