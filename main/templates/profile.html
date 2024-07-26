@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 
 <div class="row justify-content-center align-items-center g-2">
@@ -75,15 +75,25 @@
     </h3> 
     {% for propiedad in propiedades %}
 
-    <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title">{{ propiedad.nombre}} </h5>
-        <h6 class="card-subtitle mb-2 text-body-secondary">{{propiedad.descripcion}}</h6>
-        <p class="card-text">{{propiedad.comuna}}</p>
-        <a href="{% url 'eliminar_inmueble' id=propiedad.id %}" class="card-link" onclick="eliminar(event)"><i class="bi bi-trash3-fill" id="{{propiedad.id}}"></i>
-        </a>
-        <a href="/inmueble/editar/{{propiedad.id }}" class="card-link"><i class="bi bi-pencil-fill"></i></a>
+    <div class="card mb-3"  >
+      <div class="row g-0 align-items-center">
+        <div class="col-md-4">
+          <img src="{% static 'img/casa_ejemplo.jpeg' %}" class="img-fluids ms-2" style="width: 140px;" alt="soon!!!">
+        </div>
+        <div class="col-md-8">
+
+          <div class="card-body" >
+            <h5 class="card-title">{{ propiedad.nombre}} </h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">{{propiedad.descripcion}}</h6>
+            <p class="card-text">{{propiedad.comuna}}</p>
+            <a href="{% url 'eliminar_inmueble' id=propiedad.id %}" class="card-link" onclick="eliminar(event)"><i class="bi bi-trash3-fill" id="{{propiedad.id}}"></i>
+            </a>
+            <a href="/inmueble/editar/{{propiedad.id }}" class="card-link"><i class="bi bi-pencil-fill"></i></a>
+          </div>
+        </div>  
+        
       </div>
+    
     </div>
     {% endfor %}
   </div>

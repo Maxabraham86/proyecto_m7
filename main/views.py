@@ -4,6 +4,7 @@ from django.shortcuts import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django import template
+from django.db.models import Q
 from main.services import editar_user_sin_password, cambio_pass, crear_inmueble, crear_user
 from main.models import Inmueble, Comuna, Region
 
@@ -33,27 +34,54 @@ def index(req):
     
     return render (req, 'index.html', context)
 
+def filtrar_inmuebles (region_cod,comuna_cod, palabra):
+    filtro_palabra = None
+    if palabra !='':
+        filtro_palabra = Q(nombre__icontains=palabra) | Q (descripcion__icontains=palabra)    
 
-def filtrar_inmuebles(region_cod, comuna_cod,palabra):
-    # Caso 1: comuna_cod != ''
-    # Caso 2: comuna_cod == '' and region_cod != ''
-    # Caso 3: comuna_cod == '' and region_cod == ''
+    filtro_ubicacion= None
     if comuna_cod != '':
         comuna = Comuna.objects.get(cod=comuna_cod)
-        return Inmueble.objects.filter(comuna= comuna)
-    
-    elif comuna_cod == '' and region_cod != '':
+        filtro_ubicacion= Q(comuna=comuna)
+        
+    elif region_cod != '':
         region = Region.objects.get(cod=region_cod)
-        comunas = Comuna.objects.filter(region=region)
-        return Inmueble.objects.filter(comuna__in=comunas, nombre__icontains= palabra)
+        comunas_region = region.comunas.all()
+        filtro_ubicacion = Q(comuna__in=comunas_region)
+        
+    if filtro_ubicacion is None and filtro_palabra is None:
+        return Inmueble.objects.all()
+        
+    elif filtro_ubicacion is not None and filtro_palabra is None:
+        return Inmueble.objects.filter(filtro_ubicacion)
     
-    else:
-        return Inmueble.objects.filter(nombre__icontains=palabra)
-    
-    inmuebles = Inmueble.objects.all()
-    
-    return inmuebles
+    elif filtro_ubicacion is None and filtro_palabra is not None:
+        
+        return Inmueble.objects.filter(filtro_palabra)
 
+    elif filtro_ubicacion is not  None and filtro_palabra is not None:
+        return Inmueble.objects.filter(filtro_palabra & filtro_ubicacion)
+    #return []
+
+## mi propuesta unicial
+# def filtrar_inmuebles(region_cod, comuna_cod,palabra):
+#     
+#     if comuna_cod != '':
+#         comuna = Comuna.objects.get(cod=comuna_cod)
+#         return Inmueble.objects.filter(comuna= comuna , nombre__icontains=palabra )
+    
+#     elif comuna_cod == '' and region_cod != '':
+#         region = Region.objects.get(cod=region_cod)
+#         comunas = Comuna.objects.filter(region=region)
+#         return Inmueble.objects.filter(comuna__in=comunas, nombre__icontains= palabra)
+    
+#     else:
+#         return Inmueble.objects.filter(nombre__icontains=palabra)
+    
+#     inmuebles = Inmueble.objects.all()
+    
+#     return inmuebles
+## 
 
 #esta funciona para filtrar las propiedades que pertenecen al usuario
 @login_required
@@ -96,6 +124,7 @@ def edit_user(req):
     messages.success(req, '¡Usuario actualizado!')
     return redirect('/')
             
+##
     # forma desde la vista
     
 # def change_password(req):
@@ -112,7 +141,8 @@ def edit_user(req):
 # # 4 se arroja un mensaje de exito al usuario
 #     messages.success(req, 'Contraseña actualizada')
 #     return redirect('/accounts/profile')
-    
+##
+
 #forma desde un servicio
 def change_password(req): 
     password= req.POST['password']
@@ -120,6 +150,7 @@ def change_password(req):
     cambio_pass(req, password, pass_repeat)
     return redirect ('/accounts/profile')
 
+## creacion personal
 def add_propiedad(req):
     if req.method == 'POST':
         propietario_rut = req.user
@@ -139,7 +170,7 @@ def add_propiedad(req):
         return redirect ('profile')
     else:
         return render (req, 'add_propiedad.html')
-    
+##
     
     # test solicita que el usuario requiere no estar autentificado
 def usuario_no_autentificado(user):
@@ -164,3 +195,7 @@ def register(req):
     else:
         return render(req, 'register.html')
         
+
+
+def prueba(req):
+    return render( req, 'prueba.html')

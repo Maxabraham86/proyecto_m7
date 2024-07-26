@@ -5,7 +5,6 @@
     <div class="col-4">
         <h3>Filtra las propiedades</h3>
         <form action="/" method="get">
-            {% csrf_token %}
             <div class="mb-3">
                 <label for="region_cod" class="form-label">Región</label>
                 <select name="region_cod" id="region_cod" class="form-select">
@@ -44,6 +43,7 @@
                         <div class="col-8">
                             <h5 class="card-title">{{inmueble.nombre}}</h5>
                             <p class="card-text">{{inmueble.descripcion}}</p>
+                            <p class="card-text">{{inmueble.comuna}}</p>
                         </div>
                         <div class="col-4">
                             <a href="/inmueble/detalle/{{inmueble.id }}" class="btn btn-primary">ver detalle</a>
