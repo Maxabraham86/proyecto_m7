@@ -112,12 +112,8 @@ def eliminar_inmueble(req, id):
 @login_required
 def detalle_inmueble(req, id):
     id=int(id)
-    inmueble_encontrado = None
-    inmuebles = Inmueble.objects.all()
-    for inmueble in inmuebles:
-        if inmueble.id == id:
-            inmueble_encontrado = inmueble
-        break
+    inmueble_encontrado = Inmueble.objects.get(id=id)
+    
     context ={
         'inmueble':inmueble_encontrado
     }

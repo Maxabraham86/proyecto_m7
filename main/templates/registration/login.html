@@ -4,39 +4,34 @@
 
 {% block content %}
 
-        <div class="row">
-            <div class="col-4 offset-4">
-                {% if form.errors %}
-                    <p>su usuario y contraseña no coinciden</p>
-                <!-- accion ='/login' -->
-                {% endif %}
-                <form method="post" action = "/accounts/login/" >
-                <!-- onsubmit=return alert('Formulario enviado.') -->
-                    {% csrf_token %}
-                <div class="mt-2">
-                    <!-- {{ form }} -->
-<!-- ############# -->
-                    <div class="mb-3">
-                        <label class="form-label">Ingresa tu usuario:</label>
-                        <input type="text" class="form-control" name="{{ form.username.name }}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Ingresa tu contraseña:</label>
-                        <input type="password" class="form-control" name="{{ form.password.name }}" required>
-                    </div>
-                    <button id="mensaje" type="submit" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                        data-bs-custom-class="custom-tooltip" data-bs-title="Bienvenido a tu sesion">Entrar</button>
-                        
-<!-- ############### -->
+    <div class="row">
+        <div class="col-4 offset-4">
+            {% if form.errors %}
+                <p>su usuario y contraseña no coinciden</p>
+            <!-- accion ='/login' -->
+            {% endif %}
+            <form method="post" action = "/accounts/login/" >
+            <!-- onsubmit=return alert('Formulario enviado.') -->
+                {% csrf_token %}
+            <div class="mt-2">
+                <!-- {{ form }} -->
+    <!-- ############# -->
+                <div class="mb-3">
+                    <label class="form-label">Ingresa tu usuario:</label>
+                    <input type="text" class="form-control" name="{{ form.username.name }}" required>
                 </div>
-                
-                </form>
-                
+                <div class="mb-3">
+                    <label class="form-label">Ingresa tu contraseña:</label>
+                    <input type="password" class="form-control" name="{{ form.password.name }}" required>
+                </div>
+                <button id="mensaje" type="submit" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                    data-bs-custom-class="custom-tooltip" data-bs-title="Bienvenido a tu sesion">Entrar</button>
+                    
+    <!-- ############### -->
             </div>
+            
+            </form>
+            
         </div>
-
-
-
-
-
-        {% endblock %}
+    </div>
+{% endblock %}
