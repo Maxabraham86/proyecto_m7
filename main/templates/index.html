@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 <div class="row">
     <div class="col-4">
@@ -11,7 +11,6 @@
                     <option value="">Selecciona una región</option>
                     {% for region in regiones %}
                         <option value="{{region.cod}}">{{region.nombre}}
-
                         </option>
                     {% endfor %}
                 </select>
@@ -21,10 +20,9 @@
                 <select name="comuna_cod" id="comuna_cod" class="form-select">
                     <option value="">Selecciona una comuna</option>
                     {% for comuna in comunas %}
-                    <option value="{{comuna.cod}}">{{comuna.nombre}}
-
-                    </option>
-                {% endfor %}
+                        <option value="{{comuna.cod}}">{{comuna.nombre}}
+                        </option>
+                    {% endfor %}
                 </select>
             </div>
             <div class="mb-3">
@@ -37,21 +35,46 @@
     <div class="col-8">
         {% for inmueble in inmuebles %}
         
-            <div class="card mt-3">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-8">
-                            <h5 class="card-title">{{inmueble.nombre}}</h5>
-                            <p class="card-text">{{inmueble.descripcion}}</p>
-                            <p class="card-text">{{inmueble.comuna}}</p>
-                        </div>
-                        <div class="col-4">
-                            <a href="/inmueble/detalle/{{inmueble.id }}" class="btn btn-primary">ver detalle</a>
-                                
+        <div class="card mt-3">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-8">
+                        <h5 class="card-title">{{inmueble.nombre}}</h5>
+                        <p class="card-text">{{inmueble.descripcion}}</p>
+                        <p class="card-text">{{inmueble.comuna}}</p>
+                    </div>
+                    <div class="col-4">
+                        <!-- Botón para abrir el modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detalleModal{{inmueble.id}}">
+                            Ver detalle
+                        </button>
+                        
+                        <!-- <a href="/inmueble/detalle/{{inmueble.id}}" class="btn btn-primary">Ver detalle</a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Modal -->
+        <div class="modal fade" id="detalleModal{{inmueble.id}}" tabindex="-1" aria-labelledby="detalleModalLabel{{inmueble.id}}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="detalleModalLabel{{inmueble.id}}">{{ inmueble.nombre }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="{% static 'img/casa_ejemplo.jpeg' %}" class="img-fluid ms-2" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ inmueble.nombre }}</h5>
+                            <p class="card-text">{{ inmueble.descripcion }}</p>
+                            <p class="card-text">{{ inmueble.precio_mensual }}</p>
+                            <a href="/inmueble/detalle/{{inmueble.id}}" class="btn btn-primary">Ver detalle</a>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         {% endfor %}
     </div>
 </div>

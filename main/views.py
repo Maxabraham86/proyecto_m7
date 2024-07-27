@@ -61,7 +61,7 @@ def filtrar_inmuebles (region_cod,comuna_cod, palabra):
 
     elif filtro_ubicacion is not  None and filtro_palabra is not None:
         return Inmueble.objects.filter(filtro_palabra & filtro_ubicacion)
-    #return []
+    
 
 ## mi propuesta unicial
 # def filtrar_inmuebles(region_cod, comuna_cod,palabra):
